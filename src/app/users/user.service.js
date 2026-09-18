@@ -15,8 +15,25 @@ async function signIn(email, password) {
     return user;
 }
 
+async function updateUser(id,updatedUser) {
+    const userExists = await userRepository.checkUserExists(updatedUser.email);
+    if (userExists) {throw new Error('User already exists')}
+    const user = await userRepository.updateUser(id,updatedUser);
+    return user;
+}
+
+async function deleteUser(id) {
+    return await userRepository.deleteUser(id);
+}
+
+async function getUserData(id){
+    return await userRepository.getUserData(id);
+}
+
 module.exports = {
     signUp,
     signIn,
-
+    updateUser,
+    deleteUser,
+    getUserData
 }

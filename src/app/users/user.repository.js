@@ -15,9 +15,24 @@ async function signIn(email, password) {
     }, {}, {})
 }
 
+async function updateUser(id,updatedUser) {
+    return await User.findByIdAndUpdate(id,updatedUser,{new:true,select: "-password"})
+}
+
+async function deleteUser(id) {
+    return await User.deleteOne({_id:id})
+}
+
+async function getUserData(id){
+    return await User.findById(id)
+}
+
 module.exports = {
     checkUserExists,
     signUp,
     signIn,
+    updateUser,
+    deleteUser,
+    getUserData
 
 }

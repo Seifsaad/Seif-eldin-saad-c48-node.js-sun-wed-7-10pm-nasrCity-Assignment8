@@ -19,9 +19,40 @@ const signIn = async (req, res, next) => {
     }
 }
 
+const updateUser = async (req, res, next) => {
+    try {
+        let {id} = req.params;
+        const user = await userService.updateUser(id,req.body)
+        res.status(200).json({message: 'User updated successfully',success: true,data: user})
+    }catch (error) {
+        next(error)
+    }
+}
+
+const deleteUser = async (req, res, next) => {
+    try {
+        let {id} = req.params;
+        const user = await userService.deleteUser(id)
+        res.status(200).json({message: 'User deleted successfully',success: true,data: user})
+    }catch (error) {
+        next(error)
+    }
+}
+
+const getUserData = async (req, res, next) => {
+    try {
+        let {id} = req.params;
+        const user = await userService.getUserData(id)
+        res.status(200).json({message: 'User gets successfully',success: true,data: user})
+    }catch (error) {
+        next(error)
+    }
+}
 
 module.exports = {
     signUp,
     signIn,
-
+    updateUser,
+    deleteUser,
+    getUserData
 }
