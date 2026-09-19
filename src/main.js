@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./common/db/mongoose')
 const userRoute = require("./app/users/user.route");
+const noteRouter = require("./app/notes/note.route");
 
 const app = express();
 connectDB()
@@ -10,6 +11,7 @@ app.use(express.json());
 
 
 app.use('/users', userRoute);
+app.use('/notes', noteRouter);
 
 
 
