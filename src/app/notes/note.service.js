@@ -68,6 +68,21 @@ async function getNoteByIdOwner(id,userId) {
     return note;
 }
 
+async function getNoteByContent(userId,content){
+    return  await noteRepository.getNoteByContent(userId,content);
+}
+
+async function getAllNoteSelected(userId) {
+    return await noteRepository.getAllNoteSelected(userId)
+}
+
+async function getAllNotesAggregated(userId,title) {
+    return await noteRepository.getAllNotesAggregated(userId,title);
+}
+
+async function deleteAllNotes(userId){
+    return await noteRepository.deleteAllNotes(userId);
+}
 
 module.exports = {
     createNote,
@@ -77,7 +92,9 @@ module.exports = {
     updateAll,
     deleteNote,
     getPaginatedNotes,
-    getNoteByIdOwner
-
-
+    getNoteByIdOwner,
+    getNoteByContent,
+    getAllNoteSelected,
+    getAllNotesAggregated,
+    deleteAllNotes
 }

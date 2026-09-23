@@ -85,6 +85,48 @@ const getNoteByIdOwner = async (req, res,next) => {
     }
 }
 
+const getNoteByContent = async (req, res,next) => {
+    try {
+        const {userId} = req.params
+        const {content} = req.query
+        const note = await noteService.getNoteByContent(userId,content)
+        res.status(200).json({message:"note getNoteByContentSuccessfully",success:true,data:note})
+    }catch(error){
+        next(error)
+    }
+}
+
+const getAllNoteSelected = async (req, res,next) => {
+    try {
+        const {userId} = req.query;
+        const notes = await noteService.getAllNoteSelected(userId)
+        res.status(200).json({message:getAllNoteSelected,success:true,data:notes})
+    }catch (error){
+        next(error)
+    }
+}
+
+const getAllNotesAggregated = async (req, res,next) => {
+    try {
+        const {userId} = req.params
+        let {title} = req.query
+        const notes = await noteService.getAllNotesAggregated(userId,title)
+        res.status(200).json({message:'getAllNotesAggregated',success:true,data:notes})
+    }catch (error){
+        next(error)
+    }
+}
+
+    const deleteAllNotes = async (req, res,next) => {
+    try {
+        const {userId} = req.query
+        const notes = await noteService.deleteAllNotes(userId)
+        res.status(200).json({message:"all notes deleted",success:true,data:notes})
+    }catch (error){
+        next(error)
+    }
+}
+
 module.exports = {
     createNote,
     updateNote,
@@ -94,5 +136,8 @@ module.exports = {
     deleteNote,
     getPaginatedNotes,
     getNoteByIdOwner,
-
+    getNoteByContent,
+    getAllNoteSelected,
+    getAllNotesAggregated,
+    deleteAllNotes
 }
